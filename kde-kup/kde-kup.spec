@@ -81,7 +81,7 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 %{_kf6_bindir}/%{real_name}-daemon
 %{_kf6_bindir}/%{real_name}-filedigger
 %{_kf6_bindir}/%{real_name}-purger
-%{_kf6_plugindir}/kf6/kio/kio_bup.so
+%{_kf6_plugindir}/kio/kio_bup.so
 %{_kf6_qtplugindir}/plasma/kcms/systemsettings_qwidgets/kcm_%{real_name}.so
 %{_kf6_qtplugindir}/plasma/dataengine/plasma_engine_%{real_name}.so
 %{_qt6_settingsdir}/autostart/%{real_name}-daemon.desktop
