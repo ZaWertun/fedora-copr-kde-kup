@@ -1,0 +1,15 @@
+diff -r -U3 bup-0.33.3.orig/config/configure.inc bup-0.33.3/config/configure.inc
+--- bup-0.33.3.orig/config/configure.inc	2023-12-28 20:28:02.000000000 +0300
++++ bup-0.33.3/config/configure.inc	2024-03-06 12:47:42.748810986 +0300
+@@ -450,9 +450,10 @@
+ 
+     cat > "$__ac_tmpdir/ngc$$.c" << \EOF
+ #include <stdio.h>
+-main()
++int main()
+ {
+     puts("hello, sailor");
++    return 0;
+ }
+ EOF
+ 
