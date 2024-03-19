@@ -1,13 +1,15 @@
+%global git_rev   a2584f274aaae6f1428193763eed64282619fe08
+%global git_date  20240120
+%global git_short %(c=%{git_rev}; echo ${c:0:7})
+
 Name:           bup
-Version:        0.33.3
-Release:        1%{?dist}
+Version:        0.34
+Release:        1.%{git_date}git%{git_short}%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 
 License:        GPLv2
 URL:            https://github.com/%{name}/%{name}
-Source0:        https://github.com/%{name}/%{name}/archive/refs/tags/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-
-Patch0:         bup-0.33.3-fix-c-compiler-test.patch
+Source0:        https://github.com/%{name}/%{name}/archive//%{git_rev}/%{name}-%{version}-%{git_short}.tar.gz
 
 %global git_min_ver 1.5.6
 
@@ -38,7 +40,8 @@ BuildRequires:  python3-pytest-xdist
 Requires:       git-core >= %{git_min_ver}
 Requires:       par2cmdline
 Requires:       python3 >= 3.7
-Requires:       python3-fuse
+# https://github.com/libfuse/python-fuse
+Requires:       python3-libfuse
 Requires:       python3-pylibacl
 Requires:       python3-pyxattr
 Requires:       python3-tornado
@@ -50,7 +53,7 @@ providing fast incremental saves and global deduplication
 
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{git_rev}
 
 
 %build
@@ -61,24 +64,24 @@ providing fast incremental saves and global deduplication
 
 %install
 %make_install PREFIX=%{_prefix}
-%{__sed} -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{name}-*
+sed -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{name}-*
 
 
 %check
 # Removing `test-meta` - it fails inside mock
-%{__rm} -v test/ext/test-meta
+rm -v test/ext/test-meta
 # Test `test-help` broken since Fedora 39
-%{__make} %{?_smp_mflags} check ||:
+make %{?_smp_mflags} check ||:
 
 
 %files
 %license LICENSE
 %doc README.md
 %doc note/*.md
-%doc %{_datadir}/doc/%{name}/
+%doc %{_datadir}/doc/%{name}/%{name}*.html
 %{_bindir}/%{name}
 %{_prefix}/lib/%{name}/
-%{_mandir}/man1/%{name}*.1.gz
+%{_mandir}/man1/%{name}*.gz
 
 
 
