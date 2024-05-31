@@ -1,18 +1,22 @@
 %global real_name kup
 
-%global git_rev   3937544afe0c4b2fe4565fb648da999fab641e66
-%global git_date  20240302
-%global git_short %(c=%{git_rev}; echo ${c:0:7})
+#global git_rev   3937544afe0c4b2fe4565fb648da999fab641e66
+#global git_date  20240302
+#global git_short %(c=%{git_rev}; echo ${c:0:7})
 
 Name:           kde-kup
 Epoch:          1
-Version:        0.9.1
-Release:        1.%{git_date}git%{git_short}%{?dist}
+Version:        0.10.0
+Release:        1%{?dist}
 Summary:        Backup scheduler for the Plasma desktop
 
 License:        GPLv2+
 URL:            https://invent.kde.org/system/%{real_name}
+%if 0%{?git_rev}
 Source0:        https://invent.kde.org/system/%{real_name}/-/archive/%{git_rev}/%{real_name}-%{real_name}-%{git_short}.tar.gz
+%else
+Source0:        https://invent.kde.org/system/%{real_name}/-/archive/%{real_name}-%{version}/%{real_name}-%{real_name}-%{version}.tar.gz
+%endif
 
 ## upstream patches
 
@@ -58,7 +62,11 @@ Requires:      plasma-workspace-libs
 
 
 %prep
+%if 0%{?git_rev}
 %autosetup -p1 -n %{real_name}-%{git_rev}
+%else
+%autosetup -p1 -n %{real_name}-%{real_name}-%{version}
+%endif
 
 
 %build
@@ -83,7 +91,7 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 %{_kf6_bindir}/%{real_name}-purger
 %{_kf6_plugindir}/kio/kio_bup.so
 %{_kf6_qtplugindir}/plasma/kcms/systemsettings_qwidgets/kcm_%{real_name}.so
-%{_kf6_qtplugindir}/plasma/dataengine/plasma_engine_%{real_name}.so
+%{_kf6_qtplugindir}/plasma5support/dataengine/plasma_engine_%{real_name}.so
 %{_qt6_settingsdir}/autostart/%{real_name}-daemon.desktop
 %{_kf6_metainfodir}/org.kde.%{real_name}.appdata.xml
 %{_kf6_metainfodir}/org.kde.%{real_name}applet.appdata.xml
@@ -91,11 +99,14 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 %{_kf6_datadir}/icons/hicolor/scalable/apps/%{real_name}.svg
 %{_kf6_datadir}/knotifications6/%{real_name}daemon.notifyrc
 %{_kf6_datadir}/plasma/plasmoids/org.kde.kupapplet/
-%{_kf6_datadir}/plasma/services/%{real_name}daemonservice.operations
-%{_kf6_datadir}/plasma/services/%{real_name}service.operations
+%{_kf6_datadir}/plasma5support/services/%{real_name}daemonservice.operations
+%{_kf6_datadir}/plasma5support/services/%{real_name}service.operations
 %{_kf6_datadir}/qlogging-categories6/%{real_name}.categories
 
 
 %changelog
+* Fri May 31 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.10.0-1
+- version 0.10.0
+
 * Tue Dec 07 2021 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.9.1-1
 - first spec for version 0.9.1
