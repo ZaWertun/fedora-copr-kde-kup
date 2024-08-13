@@ -4,12 +4,16 @@
 
 Name:           bup
 Version:        0.34
-Release:        3.%{git_date}git%{git_short}%{?dist}
+Release:        4.%{git_date}git%{git_short}%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 
 License:        GPLv2
 URL:            https://github.com/%{name}/%{name}
 Source0:        https://github.com/%{name}/%{name}/archive//%{git_rev}/%{name}-%{version}-%{git_short}.tar.gz
+
+## downstream patches
+# Fix for fsck error "error: index-pack died of signal 11"
+Patch0:         bup-0.34-fix-fsck.patch
 
 %global git_min_ver 1.5.6
 
@@ -86,6 +90,9 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
+* Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-4.20240120gita2584f2
+- added bup-0.34-fix-fsck.patch
+
 * Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-3.20240120gita2584f2
 - reverted to commit a2584f2, Jan 20, 2024
 
