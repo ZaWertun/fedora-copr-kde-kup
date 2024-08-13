@@ -4,7 +4,7 @@
 
 Name:           bup
 Version:        0.34
-Release:        5.%{git_date}git%{git_short}%{?dist}
+Release:        6.%{git_date}git%{git_short}%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 
 License:        GPLv2
@@ -91,6 +91,9 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
+* Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-6.20240120gita2584f2
+- ignore make check result
+
 * Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-5.20240120gita2584f2
 - cleanup
 
