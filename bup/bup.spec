@@ -63,7 +63,7 @@ providing fast incremental saves and global deduplication
 %build
 CPPFLAGS="%{optflags}" \
   CFLAGS="%{optflags}" \
- LDFLAGS="%{__global_ldflags}" \
+ LDFLAGS="%{build_ldflags}" \
   ./configure --prefix=%{prefix}
 %make_build
 
