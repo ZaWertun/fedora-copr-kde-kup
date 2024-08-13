@@ -4,7 +4,7 @@
 
 Name:           bup
 Version:        0.34
-Release:        4.%{git_date}git%{git_short}%{?dist}
+Release:        5.%{git_date}git%{git_short}%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 
 License:        GPLv2
@@ -61,8 +61,10 @@ providing fast incremental saves and global deduplication
 
 
 %build
-# Macros `%%configure` can't be used - it's not configure from autotools
-./configure
+CPPFLAGS="%{optflags}" \
+  CFLAGS="%{optflags}" \
+ LDFLAGS="%{__global_ldflags}" \
+  ./configure --prefix=%{prefix}
 %make_build
 
 
@@ -74,8 +76,7 @@ sed -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{nam
 %check
 # Removing `test-meta` - it fails inside mock
 rm -v test/ext/test-meta
-# Test `test-help` broken since Fedora 39
-make %{?_smp_mflags} check ||:
+make %{?_smp_mflags} check
 
 
 %files
@@ -90,6 +91,9 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
+* Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-5.20240120gita2584f2
+- cleanup
+
 * Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-4.20240120gita2584f2
 - added bup-0.34-fix-fsck.patch
 
