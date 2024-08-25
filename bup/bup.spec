@@ -1,19 +1,14 @@
-%global git_rev   a2584f274aaae6f1428193763eed64282619fe08
-%global git_date  20240120
-%global git_short %(c=%{git_rev}; echo ${c:0:7})
-
 Name:           bup
-Version:        0.34
-Release:        6.%{git_date}git%{git_short}%{?dist}
+Version:        0.33.4
+Release:        1%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
+Epoch:          1
 
 License:        GPLv2
 URL:            https://github.com/%{name}/%{name}
-Source0:        https://github.com/%{name}/%{name}/archive//%{git_rev}/%{name}-%{version}-%{git_short}.tar.gz
+Source0:        %{url}/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 
 ## downstream patches
-# Fix for fsck error "error: index-pack died of signal 11"
-Patch0:         bup-0.34-fix-fsck.patch
 
 %global git_min_ver 1.5.6
 
@@ -57,7 +52,7 @@ providing fast incremental saves and global deduplication
 
 
 %prep
-%autosetup -p1 -n %{name}-%{git_rev}
+%autosetup -p1
 
 
 %build
@@ -91,6 +86,9 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
+* Sun Aug 25 2024 Yaroslav Sidlovsky <zawertun@gmail.com>
+- version 0.33.4, bumped epoch to 1
+
 * Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-6.20240120gita2584f2
 - ignore make check result
 
