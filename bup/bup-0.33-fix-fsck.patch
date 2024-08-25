@@ -1,0 +1,12 @@
+diff '--color=auto' -r -U3 bup-0.33.4.orig/lib/bup/cmd/fsck.py bup-0.33.4/lib/bup/cmd/fsck.py
+--- bup-0.33.4.orig/lib/bup/cmd/fsck.py	2024-08-24 21:07:53.000000000 +0300
++++ bup-0.33.4/lib/bup/cmd/fsck.py	2024-08-25 13:52:16.416196454 +0300
+@@ -177,6 +177,8 @@
+ 
+ 
+ def git_verify(base):
++    # Error "error: index-pack died of signal 11" without chdir with git-2.46.0
++    os.chdir(git.repo())
+     if opt.quick:
+         try:
+             quick_verify(base)

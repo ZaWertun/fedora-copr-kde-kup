@@ -1,6 +1,6 @@
 Name:           bup
 Version:        0.33.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 Epoch:          1
 
@@ -9,6 +9,8 @@ URL:            https://github.com/%{name}/%{name}
 Source0:        %{url}/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 
 ## downstream patches
+# Fix for fsck error "error: index-pack died of signal 11"
+Patch0:         bup-0.33-fix-fsck.patch
 
 %global git_min_ver 1.5.6
 
@@ -86,7 +88,10 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
-* Sun Aug 25 2024 Yaroslav Sidlovsky <zawertun@gmail.com>
+* Sun Aug 25 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.4-2
+- reapply bup-0.34-fix-fsck.patch
+
+* Sun Aug 25 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.4-1
 - version 0.33.4, bumped epoch to 1
 
 * Tue Aug 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 0.34-6.20240120gita2584f2
