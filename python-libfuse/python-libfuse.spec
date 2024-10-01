@@ -2,7 +2,7 @@
 %global real_name python-%{srcname}
 
 Name:    python-lib%{srcname}
-Version: 1.0.7
+Version: 1.0.8
 Release: 1%{?dist}
 Summary: Python 2.x/3.x bindings for libfuse 2.x
 
@@ -51,6 +51,9 @@ Summary:       %{summary}
 
 
 %changelog
+* Tue Oct 01 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.0.8-1
+- version 1.0.8
+
 * Tue Mar 19 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1.0.7-1
 - initial spec for version 1.0.7
 
