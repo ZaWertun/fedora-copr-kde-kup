@@ -1,6 +1,6 @@
 Name:           bup
-Version:        0.33.4
-Release:        2%{?dist}
+Version:        0.33.5
+Release:        1%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 Epoch:          1
 
@@ -9,8 +9,6 @@ URL:            https://github.com/%{name}/%{name}
 Source0:        %{url}/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 
 ## downstream patches
-# Fix for fsck error "error: index-pack died of signal 11"
-Patch0:         bup-0.33-fix-fsck.patch
 
 %global git_min_ver 1.5.6
 
@@ -73,7 +71,7 @@ sed -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{nam
 %check
 # Removing `test-meta` - it fails inside mock
 rm -v test/ext/test-meta
-make %{?_smp_mflags} check ||:
+make %{?_smp_mflags} check
 
 
 %files
@@ -88,6 +86,9 @@ make %{?_smp_mflags} check ||:
 
 
 %changelog
+* Fri Dec 13 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.5-1
+- version 0.33.5
+
 * Sun Aug 25 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.4-2
 - reapply bup-0.34-fix-fsck.patch
 
