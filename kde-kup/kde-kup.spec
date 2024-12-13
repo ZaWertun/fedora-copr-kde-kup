@@ -1,18 +1,22 @@
 %global real_name kup
 
-#global git_rev   3937544afe0c4b2fe4565fb648da999fab641e66
-#global git_date  20240302
-#global git_short %(c=%{git_rev}; echo ${c:0:7})
+%global git_rev   7cf36c1884761ddd4f8770873c2e095c4c53b6f4
+%global git_date  20241210
+%global git_short %(c=%{git_rev}; echo ${c:0:7})
 
 Name:           kde-kup
 Epoch:          1
 Version:        0.10.0
+%if "0%{?git_rev}" != "0"
+Release:        1.%{git_date}git%{git_short}%{?dist}
+%else
 Release:        1%{?dist}
+%endif
 Summary:        Backup scheduler for the Plasma desktop
 
 License:        GPLv2+
 URL:            https://invent.kde.org/system/%{real_name}
-%if 0%{?git_rev}
+%if "0%{?git_rev}" != "0"
 Source0:        https://invent.kde.org/system/%{real_name}/-/archive/%{git_rev}/%{real_name}-%{real_name}-%{git_short}.tar.gz
 %else
 Source0:        https://invent.kde.org/system/%{real_name}/-/archive/%{real_name}-%{version}/%{real_name}-%{real_name}-%{version}.tar.gz
@@ -37,6 +41,7 @@ BuildRequires: cmake(Qt6CoreTools)
 
 BuildRequires: cmake(KF6KIO)
 BuildRequires: cmake(KF6I18n)
+BuildRequires: cmake(KF6Crash)
 BuildRequires: cmake(KF6Solid)
 BuildRequires: cmake(KF6Config)
 BuildRequires: cmake(KF6IdleTime)
@@ -62,7 +67,7 @@ Requires:      plasma-workspace-libs
 
 
 %prep
-%if 0%{?git_rev}
+%if "0%{?git_rev}" != "0"
 %autosetup -p1 -n %{real_name}-%{git_rev}
 %else
 %autosetup -p1 -n %{real_name}-%{real_name}-%{version}
