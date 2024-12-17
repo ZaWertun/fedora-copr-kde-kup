@@ -81,8 +81,8 @@ make %{?_smp_mflags} check
 %doc %{_datadir}/doc/%{name}/%{name}*.html
 %{_bindir}/%{name}
 %{_prefix}/lib/%{name}/
-%{_mandir}/man1/%{name}*.gz
-
+%{_mandir}/man1/%{name}*.1.gz
+%{_mandir}/man5/%{name}*.5.gz
 
 
 %changelog
