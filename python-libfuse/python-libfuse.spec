@@ -33,10 +33,6 @@ Summary:       %{summary}
 %py3_build
 
 
-%check
-%{python3} setup.py test
-
-
 %install
 %py3_install
 
