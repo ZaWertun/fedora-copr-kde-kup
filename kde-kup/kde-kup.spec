@@ -99,7 +99,7 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 %{_kf6_qtplugindir}/plasma5support/dataengine/plasma_engine_%{real_name}.so
 %{_qt6_settingsdir}/autostart/%{real_name}-daemon.desktop
 %{_kf6_metainfodir}/org.kde.%{real_name}.appdata.xml
-%{_kf6_metainfodir}/org.kde.%{real_name}applet.appdata.xml
+#{_kf6_metainfodir}/org.kde.%{real_name}applet.appdata.xml
 %{_kf6_datadir}/applications/kcm_%{real_name}.desktop
 %{_kf6_datadir}/icons/hicolor/scalable/apps/%{real_name}.svg
 %{_kf6_datadir}/knotifications6/%{real_name}daemon.notifyrc
