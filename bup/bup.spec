@@ -1,5 +1,5 @@
 Name:           bup
-Version:        0.33.9
+Version:        0.33.10
 Release:        1%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 Epoch:          1
@@ -86,6 +86,9 @@ make %{?_smp_mflags} check
 
 
 %changelog
+* Wed Jan 28 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.10-1
+- version 0.33.10
+
 * Sun Aug 31 2025 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.9-1
 - version 0.33.9
 
