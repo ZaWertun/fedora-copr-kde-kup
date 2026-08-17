@@ -1,16 +1,16 @@
 %global real_name kup
 
-%global git_rev   7cf36c1884761ddd4f8770873c2e095c4c53b6f4
-%global git_date  20241210
+%global git_rev   bc6d42e25c49d3b4ea3af9390b2dfb03eae9e22c
+%global git_date  20260816
 %global git_short %(c=%{git_rev}; echo ${c:0:7})
 
 Name:           kde-kup
 Epoch:          1
 Version:        0.10.0
 %if "0%{?git_rev}" != "0"
-Release:        1.%{git_date}git%{git_short}%{?dist}
+Release:        2.%{git_date}git%{git_short}%{?dist}
 %else
-Release:        1%{?dist}
+Release:        2%{?dist}
 %endif
 Summary:        Backup scheduler for the Plasma desktop
 
@@ -85,6 +85,7 @@ Requires:      plasma-workspace-libs
 
 
 %check
+desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kup-daemon.desktop
 desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.desktop
 
 
@@ -95,11 +96,13 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 %{_kf6_bindir}/%{real_name}-filedigger
 %{_kf6_bindir}/%{real_name}-purger
 %{_kf6_plugindir}/kio/kio_bup.so
+%{_kf6_plugindir}/kfileitemaction/kupfileitemaction.so
 %{_kf6_qtplugindir}/plasma/kcms/systemsettings_qwidgets/kcm_%{real_name}.so
 %{_kf6_qtplugindir}/plasma5support/dataengine/plasma_engine_%{real_name}.so
 %{_qt6_settingsdir}/autostart/%{real_name}-daemon.desktop
 %{_kf6_metainfodir}/org.kde.%{real_name}.appdata.xml
 #{_kf6_metainfodir}/org.kde.%{real_name}applet.appdata.xml
+%{_kf6_datadir}/applications/kup-daemon.desktop
 %{_kf6_datadir}/applications/kcm_%{real_name}.desktop
 %{_kf6_datadir}/icons/hicolor/scalable/apps/%{real_name}.svg
 %{_kf6_datadir}/knotifications6/%{real_name}daemon.notifyrc
@@ -110,6 +113,9 @@ desktop-file-validate %{buildroot}%{_kf6_datadir}/applications/kcm_%{real_name}.
 
 
 %changelog
+* Mon Aug 17 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.10.0-2.20260816gitbc6d42e
+- git revision 1b76da82ec259c18ffb4ec94af2ce6dd715c4ac5 (Aug 16, 2026)
+
 * Fri May 31 2024 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.10.0-1
 - version 0.10.0
 
