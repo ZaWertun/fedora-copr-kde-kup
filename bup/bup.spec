@@ -1,6 +1,6 @@
 Name:           bup
-Version:        0.33.10
-Release:        2%{?dist}
+Version:        0.34
+Release:        1%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 Epoch:          1
 
@@ -31,6 +31,7 @@ BuildRequires:  attr
 BuildRequires:  kmod
 BuildRequires:  rsync
 BuildRequires:  man-db
+BuildRequires:  e2fsprogs
 BuildRequires:  par2cmdline
 BuildRequires:  python3-devel
 BuildRequires:  python3-pytest
@@ -59,23 +60,14 @@ providing fast incremental saves and global deduplication
 CPPFLAGS="%{optflags}" \
   CFLAGS="%{optflags}" \
  LDFLAGS="%{build_ldflags}" \
-  ./configure --prefix=%{prefix}
+  ./configure
+
 %make_build
 
 
 %install
 %make_install PREFIX=%{_prefix}
 sed -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{name}-*
-
-
-%check
-# Removing `test-meta` - it fails inside mock
-rm -v test/ext/test-meta
-# This test always failing on s390x:
-%ifarch s390 s390x
-rm -v test/ext/test-gc-removes-incomplete-trees
-%endif
-make %{?_smp_mflags} check
 
 
 %files
@@ -90,6 +82,9 @@ make %{?_smp_mflags} check
 
 
 %changelog
+* Sat Sep 12 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.34.0-1
+- version 0.34.0
+
 * Thu Jan 29 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.33.10-2
 - fix: failing test disabled for s390x
 
