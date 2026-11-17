@@ -27,6 +27,7 @@ Source0:        https://invent.kde.org/system/%{real_name}/-/archive/%{real_name
 ## upstreamable patches
 
 BuildRequires: gettext
+BuildRequires: systemd
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 
