@@ -1,5 +1,5 @@
 Name:           bup
-Version:        0.34
+Version:        0.34.1
 Release:        1%{?dist}
 Summary:        Very efficient backup system based on the git packfile format
 Epoch:          1
@@ -82,6 +82,9 @@ sed -i 's|#!/bin/sh|#!/usr/bin/sh|' %{buildroot}%{_prefix}/lib/%{name}/cmd/%{nam
 
 
 %changelog
+* Tue Nov 17 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.34.1-1
+- version 0.34.1
+
 * Sat Sep 12 2026 Yaroslav Sidlovsky <zawertun@gmail.com> - 1:0.34.0-1
 - version 0.34.0
 
